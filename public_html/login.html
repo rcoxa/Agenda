@@ -1,34 +1,49 @@
-<!DOCTYPE html>
-<html >
-    <head>
-        <title>Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <link rel='stylesheet prefetch' href='css/font-awesome.min.css'>
-        <link rel="stylesheet" href="css/style.css">
-
-    </head>
-
-    <body>
-
-        <div class="login-form">
-            <h1>Agenda</h1>
-            <div class="form-group ">
-                <input type="text" class="form-control" placeholder="Usuário" id="UserName">
-                <i class="fa fa-user"></i>
-            </div>
-            <div class="form-group log-status">
-                <input type="password" class="form-control" placeholder="Senha" id="Passwod">
-                <i class="fa fa-lock"></i>
-            </div>
-            <span class="alert">Falta informar a senha</span>
-            <a class="link" href="#">Perdeu sua senha??</a>
-            <button type="button" class="log-btn" >Acessar</button>
-        </div>
-      
-        <script src='js/jquery-2.2.3.min.js'></script>
-        <script src="js/login.js"></script>
-    
-    </body>
+<!doctype html>
+<html lang="pt-BR">
+	<head>
+		<meta charset="UTF-8">
+		<title>Agenda</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" href="css/font-awesome.css">
+		<link rel="stylesheet" href="css/bootstrap.css">
+		<link rel="stylesheet" href="css/style.css">
+	</head>
+	<body style="background:#000;"> 
+		<div class="container"><br/>
+			<br />
+			<div class="row">
+				<div class="col-xs-12 col-sm-offset-2 col-sm-8 col-md-offset-3 col-md-6"> 
+					<div class="panel panel-default">
+						<div class="panel-heading">
+							<h1><i class="glyphicon glyphicon-calendar fa-large"></i>Agenda</h1>
+						</div>
+						<div class="panel-body">
+							<form id="formularioDeLogin" action="" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<label for="input-username">Usuário</label>
+									<div class="input-group"><span class="input-group-addon"><i class=" glyphicon glyphicon-user"></i></span>
+										<input type="text" name="username" value="" placeholder="Usuário" id="input-username" class="form-control inputLogin" autofocus autocomplete="off" maxlength="20" required/>
+									</div>
+								</div>
+								<div class="form-group">
+									<label for="input-password">Senha</label>
+									<div class="input-group"><span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+										<input type="password" name="password" value="" placeholder="Senha" id="input-password" class="form-control inputLogin" autocomplete="off" maxlength="40" required/>
+									</div>
+								</div>
+								<div class="form-group">
+									<a class="link" href="#">Perdeu sua senha??</a>
+								</div><br></br>
+								<div class="text-right">
+									<button type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-off"></i> OK</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script language="javascript" src="js/jquery-2.2.3.js"></script>
+		<script language="javascript" src="js/bootstrap.js"></script>
+	</body>
 </html>
