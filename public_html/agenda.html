@@ -52,11 +52,38 @@
                             // if so, remove the element from the "Draggable Events" list
                             $(this).remove();
                         }
+                    },
+                    dayClick: function(date, jsEvent, view) {
+
+                    
+                    
+
+                            //abaixo comentado eventos de alert ao clicar em uma data
+                            /*
+                            alert('Clicked on: ' + date.format());
+                            alert('Coordinates: ' + jsEvent.pageX + ',' + jsEvent.pageY);
+                            alert('Current view: ' + view.name);           
+                            // change the day's background color just for fun
+                            $(this).css('background-color', 'red'); 
+                            */
+
+                        var moment = $('#calendar').fullCalendar('getDate');
+                        $('#calendar').fullCalendar('destroy');
+                        $('#calendar').fullCalendar({
+                    header: {
+                        left: 'prev,next today',
+                        center: 'title',
+                        right: 'month,agendaWeek,agendaDay'
+                    },
+                    editable: true,
+                    droppable: true, // this allows things to be dropped onto the calendar
+                    defaultView: 'agendaDay',
+                    gotoDate: moment.format()
+                     });   
+
                     }
                 });
-
-
-            });
+        });
 
         </script>
         <style>
