@@ -1,0 +1,75 @@
+unit formPrincipalServer;
+
+interface
+
+uses system.odbc,Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants,
+  System.Classes, Vcl.Graphics, Vcl.Controls, Vcl.Forms, inifiles,Vcl.Dialogs,
+  Vcl.StdCtrls, Vcl.MPlayer, FileCtrl,Vcl.Buttons, ServerMethodsUnit1,
+  ServerContainerUnit1;
+
+type
+  TForm3 = class(TForm)
+    Label1: TLabel;
+    Label2: TLabel;
+    edtcaminho: TEdit;
+    SpeedButton1: TSpeedButton;
+    SpeedButton2: TSpeedButton;
+    procedure SpeedButton2Click(Sender: TObject);
+    procedure SpeedButton1Click(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+  private
+    { Private declarations }
+  public
+    { Public declarations }
+  end;
+
+var
+  Form3: TForm3;
+  easymob : Tinifile;
+  servidor : TServerMethods1;     //***Tem que criar variavel
+
+implementation
+
+{$R *.dfm}
+
+
+
+procedure TForm3.FormCreate(Sender: TObject);
+begin
+    easymob := TIniFile.Create('C:\easy\EasyMob.ini');
+    edtcaminho.Text := easymob.ReadString('easymob','CaminhoBancodeDados','');
+end;
+
+procedure TForm3.SpeedButton1Click(Sender: TObject);
+var
+caminho : string;
+begin
+caminho := easymob.ReadString('easymob','CaminhoBancodeDados','');
+
+servidor.fd_vendas.Params.Values['database'] := caminho+'VENDAS';
+    //**caminho do banco em tempo de execução
+servidor.fd_vendas.Open();        //**inicia a conexao
+servidor.fdqyQuery_vendas.Open();   //abrir query
+/////////////fim vendas
+servidor.FD_Cliente.Params.Values['database'] := caminho+'CLIENTES';
+servidor.FD_Cliente.Open();
+servidor.Query_cliente.Open();
+easymob := TIniFile.Create('C:\easy\EasyMob.ini');
+easymob.WriteString('Easymob','CaminhoBancodeDados',edtcaminho.Text);  //escreve no ini
+ easymob.Free;
+ servidor.Free;
+end;
+
+procedure TForm3.SpeedButton2Click(Sender: TObject);
+var
+dir : string;
+begin
+ if FileCtrl.SelectDirectory(dir, [sdAllowCreate, sdPerformCreate, sdPrompt], 1000) then
+      edtcaminho.Text := dir;
+   if Copy(edtcaminho.Text, Length(edtcaminho.Text), 1) <> '\' then
+   begin
+      edtcaminho.Text := edtcaminho.Text + '\';
+   end;
+end;
+
+end.
